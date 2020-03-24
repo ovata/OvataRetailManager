@@ -1,1 +1,1 @@
-# OvataRetailManager
+# Ovata Retail Manager
