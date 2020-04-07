@@ -41,6 +41,38 @@ namespace ORMDesktopUI.ViewModels
 			}
 		}
 
+		
+
+		public bool IsErrorVisible
+		{
+			get 
+			{
+				bool output = false;
+
+				if (ErrorMessage?.Length > 0)
+				{
+					output = true;
+				}
+				return output;
+			}
+			
+		}
+
+		private string _errorMessage;
+
+		public string ErrorMessage
+		{
+			get { return _errorMessage; }
+			set
+			{
+				_errorMessage = value;
+				NotifyOfPropertyChange(() => IsErrorVisible);
+				NotifyOfPropertyChange(() => ErrorMessage);
+			}
+		}
+
+
+
 		public bool CanLogIn
 		{
 			get
@@ -58,7 +90,16 @@ namespace ORMDesktopUI.ViewModels
 
 		public async Task Login()
 		{
-			var result = await _apiHelper.Authenticate(UserName, Password);
+			try
+			{
+				ErrorMessage = "";
+				var result = await _apiHelper.Authenticate(UserName, Password);
+			}
+			catch (Exception ex)
+			{
+
+				ErrorMessage = ex.Message;
+			}
 		}
 	}
 }
