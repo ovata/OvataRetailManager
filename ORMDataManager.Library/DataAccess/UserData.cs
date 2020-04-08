@@ -16,7 +16,7 @@ namespace ORMDataManager.Library.DataAccess
 
             var p = new { Id = Id };
 
-            var output = sql.LoadData<UserModel, dynamic>("dbo.spUserLookUp", p, "ORMDatabase");
+            var output = sql.LoadData<UserModel, dynamic>("dbo.spUserLookUp", p, "ORMDB");
             return output;
         }
     }
